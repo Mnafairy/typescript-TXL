@@ -1,11 +1,13 @@
 import { Content, SideMenu } from "../components";
 import { useState } from "react";
 export default function Home() {
-  const [cont, setCont] = useState("");
+  const [cont, setCont] = useState<number>(0);
+
   let sideMenus = [
     {
       title: "TS for the New Programmer",
       buttonText: "TS for the New Programmer",
+      id: 0,
       content: [
         {
           title: "content title 1",
@@ -27,6 +29,7 @@ export default function Home() {
     {
       title: "TypeScript for JavaScript Programmers",
       buttonText: "TypeScript for JS Programmers",
+      id: 1,
       content: [
         {
           title: "content title 1",
@@ -48,6 +51,7 @@ export default function Home() {
     {
       title: "TS for Java/C# Programmers",
       buttonText: "TS for Java/C# Programmers",
+      id: 2,
       content: [
         {
           title: "content title 1",
@@ -61,27 +65,28 @@ export default function Home() {
         },
         {
           title: "content title 3",
-          text: "content text-3",
+          text: "content text-3ww",
           isVerified: false,
         },
       ],
     },
   ];
   return (
-    <main>
-      {sideMenus.map((menu) => (
-        <div className="flex">
-          <div className="w-1/2">
-            <SideMenu menu={menu} setCont={setCont} />
-          </div>
-          <div className={`w-1/2 ${cont == 1 ? "block" : "hidden"}`}>
+    <div className="flex">
+      <div className="flex flex-col">
+        {sideMenus.map((menu, key) => (
+          <div>
+            <SideMenu menu={menu} key={key} setCont={setCont} />
+            {/* <div className={`w-1/2`}>
             {menu.title}
             {menu.content.map((content) => (
               <Content content={content} />
             ))}
+          </div> */}
           </div>
-        </div>
-      ))}
-    </main>
+        ))}
+      </div>
+      <Content content={sideMenus[cont].content} />
+    </div>
   );
 }

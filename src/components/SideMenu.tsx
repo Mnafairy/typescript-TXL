@@ -1,3 +1,5 @@
+import { Dispatch } from "react";
+
 type ContentArray = {
   title: string;
   text: string;
@@ -7,9 +9,10 @@ type ContentArray = {
 type MenuType = {
   title: string;
   buttonText: string;
+  id: number;
   content: Array<ContentArray>;
 };
-type setContType = () => {};
+type setContType = Dispatch<React.SetStateAction<number>>;
 // type PropType = {
 //   menu: MenuType;
 // };
@@ -19,13 +22,13 @@ export const SideMenu = ({
   setCont,
 }: {
   menu: MenuType;
-  setCont: setContType;
+  setCont: Dispatch<React.SetStateAction<number>>;
 }) => {
   return (
-    <div className="flex">
+    <div className="">
       <button
+        onClick={() => setCont(menu.id)}
         className="w-[250px] h-10 bg-gray-100 flex justify-center border"
-        onClick={setCont(1)}
       >
         {menu.buttonText}
       </button>
